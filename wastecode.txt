@@ -62,7 +62,7 @@ lass MyAdminSite(admin.ModelAdmin):
     def weather_view(self,request):
         url = "https://community-open-weather-map.p.rapidapi.com/weather"
         querystring = {"q":"nairobi","lat":"0","lon":"0","callback":"test","id":"2172797","lang":"null","units":"imperial","mode":"xml"}
-        headers = {	"X-RapidAPI-Key": "1612201921msh42005f9a2b65ae5p139a0ejsna09a36640bb7",
+        headers = {
 	            "X-RapidAPI-Host": "community-open-weather-map.p.rapidapi.com"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         
@@ -81,16 +81,4 @@ def get_urls(self) :
             path('weather/', self.weather_view),
             ]
         return my_urls + urls
-    def weather_view(self,request):
-        url = "https://community-open-weather-map.p.rapidapi.com/weather"
-        querystring = {"q":"nairobi","lat":"0","lon":"0","callback":"test","id":"2172797","lang":"null","units":"imperial","mode":"xml"}
-        headers = {	"X-RapidAPI-Key": "1612201921msh42005f9a2b65ae5p139a0ejsna09a36640bb7",
-	            "X-RapidAPI-Host": "community-open-weather-map.p.rapidapi.com"}
-        response = requests.request("GET", url, headers=headers, params=querystring)
-        
-        context = dict(
-            self.admin_site.each_context(request),
-            response = response,
-            )
-        template = 'admin/index.html'
-        return TemplateResponse(request,template,context)
+    
